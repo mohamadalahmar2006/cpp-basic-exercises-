@@ -1,0 +1,22 @@
+#include <iostream>
+#include <time.h>
+#include <stdlib.h>
+
+int main()
+{
+    int firstl = 0, lastl = 0;
+
+    srand(time(0));
+
+    std::cout << "Enter the first number: ";
+    std::cin >> firstl;
+
+    std::cout << "Enter the last number: ";
+    std::cin >> lastl;
+
+    int r = rand() % (lastl - firstl + 1) + firstl;
+
+    std::cout << "Your random number is: " << r;
+
+    return 0;
+}
