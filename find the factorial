@@ -1,0 +1,35 @@
+#include<iostream>
+
+int factorial(int n);
+void print(int n);
+int main() {
+
+	
+	int n = 0;
+
+	std::cout << "enter the number to find the factorial \n";
+	std::cin >> n;
+	print( n);
+	
+}
+int factorial(int n) {
+	
+	int f = 0;
+	if (n == 0) {
+
+		 f= 1;
+	
+	}
+	else {
+
+	f = n*factorial(n - 1);
+		
+	}
+
+	return f;
+
+}
+void print(int n){ 
+	if (n < 0) { std::cout << "please enter n>0 \n";main(); }
+	else { std::cout << "the factorial is : " << factorial(n); }
+}
