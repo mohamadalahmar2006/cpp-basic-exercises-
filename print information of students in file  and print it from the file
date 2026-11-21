@@ -1,0 +1,123 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<limits>
+
+void setstudentinfo(std::ifstream& file) {
+	std::string name;
+	int grade[3];
+	while (file >> name >> grade[0] >> grade[1] >> grade[2])
+	{
+		std::cout << name << '\n' << grade[0] << ' ' << grade[1] << ' ' << grade[2] << '\n';
+	}
+
+
+}
+struct student {
+
+	std::string name;
+
+	int grade[3];
+
+	void setname(std::string name) {
+		this->name = name;
+	}
+	void setgrade(int  grade[]) {
+		for (int i = 0;i < 3;i++) { this->grade[i] = grade[i]; }
+	}
+
+	void getname() { std::cout << "name : " << name << '\n'; };
+	void getgrade() { for (int i = 0;i < 3;i++) { std::cout << grade[i] << '\n'; } }
+	void fgetname(std::ofstream& file) { file << name; }
+	void fgetgrade(std::ofstream& file) { for (int i = 0;i < 3;i++) { file << ' ' << grade[i]; }file << '\n'; }
+	
+};
+
+
+
+int main() {	bool input = false;
+std::string name;
+	int grade[3];
+	int studentnum = 0;
+std::vector<student>infostudent;
+
+
+	while(!input){ 
+
+	
+
+
+	std::cout << "enter the number of the student \n";
+std::	cin >> studentnum;
+
+if (studentnum < 1&& !std::cin.fail()) { std::cout << "enter number > 0 \n"; }
+else if (std::cin.fail()) { std::cout << "enter a \" number \" \n "; std::cin.clear();std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); }
+else { input = true; }
+	
+	}
+
+	
+	
+	infostudent.resize(static_cast<std::size_t>(studentnum));
+
+
+	std::ofstream print("student.txt",std::ios::app);
+
+
+	if (!print.is_open()) { std::cout << "cannot open the file ! \n";return 1;}
+
+
+
+	for (int i = 0;i < studentnum;i++) {
+		input = false;
+		while(!input){  std::cout << "enter name \n";
+		std::cin >> name;
+		if (!std::cin.fail()) { input = true; }
+		else { std::cout << "wrong input \n";std::cin.clear();std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+		}
+		
+		infostudent[i].setname(name);
+		
+		for (int j = 0;j < 3;j++) {
+			input = false; 
+		
+		while (!input) {
+
+std::cout << "enter grade[" << j << "] : \n";
+std::cin >> grade[j]; 
+if (!std::cin.fail()&&grade[j]>=0) { input = true; }
+else { std::cout << "wrong input \n";std::cin.clear();std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+		}
+		
+		}
+		infostudent[i].setgrade(grade);
+
+	}
+	for (int i = 0;i < studentnum;i++){ 
+		
+		
+		infostudent[i].getname();
+		infostudent[i].getgrade();
+		infostudent[i].fgetname(print);
+		infostudent[i].fgetgrade(print);
+
+	
+   }
+	
+	print.close();
+	std::ifstream getinfo("student.txt");
+
+	if (!getinfo.is_open()) { std::cout << "cannot open the file !! \n";return 1; }
+
+	std::cout << "open the file\n";
+	 setstudentinfo(getinfo);
+	 getinfo.close();
+	return 0;
+
+}
+
+
+
