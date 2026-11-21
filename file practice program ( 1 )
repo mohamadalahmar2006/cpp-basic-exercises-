@@ -1,0 +1,43 @@
+#include<iostream>
+#include<fstream >
+
+
+int main() {
+
+	std::ofstream print("readme.txt");
+
+	if (!print.is_open()) { std::cout << "cannot open the file \n";return 1; }
+
+	for (int i = 0;i < 10;i++) {print << i << std::endl; }
+
+	print.close();
+
+
+	std::ifstream get("readme.txt");
+	if (!get.is_open()) { std::cout << "cannot open the file \n";return 1; }
+	int num;
+	while (get >>num ) {
+
+		std::cout << num << std::endl;
+
+	}
+	get.close(); 
+
+	 
+	std::ofstream addprint("readme.txt", std::ios::app );
+	if (!addprint.is_open()) { std::cout << "cannot open the file \n";return 1; }
+
+	for (int i = 10;i < 19;i++) { addprint << i << std::endl; }
+
+	addprint.close();
+
+	get.open("readme.txt");
+	if (!get.is_open()) { std::cout << "cannot open the file \n";return 1; }
+	
+	while (get >> num) {
+
+		std::cout << num << std::endl;
+
+	}
+	get.close();
+}
